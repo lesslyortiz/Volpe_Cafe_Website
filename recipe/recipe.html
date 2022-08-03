@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes</title>
+  <link href="../style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../recipes.css" />
+  <link rel="stylesheet" type="text/css" href="recipe/recipe.css" /> 
+<!--  <link rel="stylesheet" type="text/css" href="recipe.css" /> -->
+
+<!--   font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+      
+  <!--  NAVBAR    -->
+  <nav class="navbar">
+     <!-- LOGO -->
+      <div class="logo">
+        <img class = "logo-img" src="Volpe-logo.png" alt="Picture of logo">
+     </div>
+     <!-- NAVIGATION MENU -->
+     <ul class="nav-links">
+       <!-- USING CHECKBOX HACK -->
+       <input type="checkbox" id="checkbox_toggle" />
+       <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+       <!-- NAVIGATION MENUS -->
+       <div class="menu">
+         <li><a href="../index/index.html">HOME</a></li>
+         <li><a href="../about/about.html">ABOUT</a></li>
+         <li><a href="../recipes/recipes.html">RECIPES</a></li>
+         <li><a href="../contact/contact.html">CONTACT</a></li>
+       </div>
+     </ul>
+   </nav>  
+<!--   NAVBAR ENDS -->
+
+
+    
+    <!--   RECIPES SECTION BEGINS -->    
+
+  <!-- where can i call the function?-->
+  <div id = "instructions"> 
+
+  </div>
+  <div id = "instr">
+ <img src = "https://spoonacular.com/recipeImages/1087495-312x231.jpg" style= "align-items:center"/>
+    <h3>Ingredients</h3>
+    <p>
+    ½ - 1 teaspoon matcha
+    ¼ cup hot water
+    ¼ cup warmed coconut milk
+    Maple syrup, honey, stevia, or sweetener of choice, optional
+    </p>
+    <h3>Instructions</h3>
+    <p>
+    Sift your matcha so it is lump-free.<br>
+    Spoon the matcha into a large mug. Add the hot water and whisk briskly, in an up and down motion, until frothy - about 30 seconds or so. <br>Add the coconut milk and whisk until well combined.<br>
+    Taste and add additional water, coconut milk, and/or sweetener to your liking.    
+    </p> <br>  
+  </div>
+        
+
+  <a href='' id='sourceLink'></a>
+
+  
+    <!--   RECIPES SECTION ENDS -->  
+    
+  <!-- FOOTER -->
+  <footer class="site-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h6>Volpe Cafe</h6>
+            </div>
+  
+            <div class="col-xs-6 col-md-3">
+              <h6>Get in touch</h6>
+              <ul class="footer-links">
+                <li><a href="https://www.instagram.com/redventures/?hl=en" target="_blank">Instagram</a>  </li>
+                <li><a href="https://www.facebook.com/redventures/" target="_blank">Facebook</a></li>
+                <li><a href="https://twitter.com/RedVentures?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">Twitter</a></li>
+              </ul>
+            </div>
+  
+            <div class="col-xs-6 col-md-3">
+              <h6>Location</h6>
+              <ul class="footer-links">
+                <li><a href="https://goo.gl/maps/2DwqU7CqArGxj78f7" target="_blank">1101 Red Ventures   Dr, Fort Mill, SC 29707</a></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
+           <a href="#">WEtech</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+  </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script> function getsource(id){
+    $.ajax({  url:"https://api.spoonacular.com/recipes/"+id+"/information?apiKey=a399b0f387834345afa7c63540c08f81",success:        
+        function(res){
+            document.getElementById("sourceLink").href=res.sourceUrl
+        }
+    });
+}
+
+    
+function getRecipe(q){
+    $.ajax({
+        url:"https://api.spoonacular.com/recipes/search?apiKey=a399b0f387834345afa7c63540c08f81&number=1&addRecipeInformation=true&query="+ q, 
+        success:function(res){
+            document.getElementById("instructions").innerHTML="<h1>"+res.results[0].title+"</h1><br><img src='"+ res.baseUrl+ "<br>"+res.results[0].readyInMinutes+" minutes"
+            getsource(res.results[0].id)
+        }
+    });
+}
+ getRecipe(' tea');
+  console.log(getRecipe(' tea'));
+  </script> 
+ 
+</body>
+</html>
